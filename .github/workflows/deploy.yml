@@ -52,7 +52,11 @@ jobs:
           # 部署的文件目录，Vite 构建默认输出到 dist 目录
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          # 部署到 gh-pages 分支
+          destination_dir: ./
           # 保持历史提交记录
           keep_files: false
           # 提交信息
           commit_message: 'Deploy from GitHub Actions'
+          # 强制推送
+          force_orphan: true
