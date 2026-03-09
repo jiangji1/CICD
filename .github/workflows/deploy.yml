@@ -39,7 +39,7 @@ jobs:
       
       # 步骤 3.5：代码质量检查
       - name: Run lint
-        run: npm run lint
+        run: npm run lint 
       
       # 步骤 4：构建项目
       - name: Build project
