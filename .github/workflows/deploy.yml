@@ -1,0 +1,54 @@
+# GitHub Actions CI/CD 配置文件
+# 实现代码提交后自动安装依赖、打包并部署到 GitHub Pages
+
+name: Deploy to GitHub Pages
+
+# 触发条件：当代码推送到 main 分支时触发
+on:
+  push:
+    branches:
+      - main
+
+# 工作流任务
+jobs:
+  # 构建和部署任务
+  deploy:
+    # 运行环境：使用最新的 Ubuntu 环境
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 步骤 1：检出代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # 确保获取完整的 Git 历史，以便后续操作
+          fetch-depth: 0
+      
+      # 步骤 2：设置 Node.js 环境
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          # 指定 Node.js 版本
+          node-version: '18'
+          # 缓存 npm 依赖，加速安装
+          cache: 'npm'
+      
+      # 步骤 3：安装依赖
+      - name: Install dependencies
+        run: npm install
+      
+      # 步骤 4：构建项目
+      - name: Build project
+        run: npm run build
+      
+      # 步骤 5：部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          # 部署的文件目录，Vite 构建默认输出到 dist 目录
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          # 保持历史提交记录
+          keep_files: false
+          # 提交信息
+          commit_message: 'Deploy from GitHub Actions'
