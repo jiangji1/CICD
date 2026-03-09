@@ -49,9 +49,19 @@ jobs:
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
+          # GitHub Token，用于认证和推送代码
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 要发布的目录，即构建后的 dist 目录
           publish_dir: ./dist
+          # 目标目录，./ 表示部署到 gh-pages 分支的根目录
           destination_dir: ./
+          # 是否保留现有文件，false 表示覆盖所有文件
           keep_files: false
+          # 提交信息
           commit_message: 'Deploy from GitHub Actions'
+          # 是否强制创建孤立分支，保持 gh-pages 分支历史简洁
           force_orphan: true
+          # Git 用户名，用于提交
+          user_name: 'github-actions[bot]'
+          # Git 用户邮箱，用于提交
+          user_email: 'github-actions[bot]@users.noreply.github.com'
