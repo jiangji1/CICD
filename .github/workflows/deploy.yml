@@ -60,3 +60,6 @@ jobs:
           commit_message: 'Deploy from GitHub Actions'
           # 强制推送
           force_orphan: true
+          # 部署到 gh-pages 分支
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
