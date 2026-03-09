@@ -11,7 +11,7 @@ function App() {
   const { value, status } = useSelector((state) => state.counter);
 
   return (
-    <Router basename="/CICD">
+    <Router>
       <div className="app">
         <nav>
           <ul>
